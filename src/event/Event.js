@@ -34,6 +34,7 @@ class Event extends Component {
 
   addEvent(event) {
     if (event) {
+      console.log(event);
       this.state.events.push(event);
 
       this.setState({
