@@ -1,6 +1,6 @@
 import { Grid, Row } from 'react-bootstrap';
 
-const EventList = ({ events }) => {
+const EventList = ({events}) => {
   return (
     <div className="events">
       <Grid>
