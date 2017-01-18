@@ -1,8 +1,11 @@
-import React from 'react';
-import creds from '../creds.js';
+import React, { Component } from 'react';
+import { Grid, Row, Col } from 'react-bootstrap';
+import token from '../apiToken.js';
+import EventForm from './EventForm';
+import EventList from './EventList';
 import 'whatwg-fetch';
 
-class EventList extends React.Component {
+class Event extends Component {
   constructor(props) {
     super(props);
 
@@ -12,29 +15,14 @@ class EventList extends React.Component {
   }
 
   componentDidMount() {
-    this.authenticate().then((authResponse) => {
-      if (authResponse.token) {
-        this.getEvents(authResponse.token) .then((eventsResponse) => {
-          this.setState({ events: eventsResponse.results });
-        }, (error) => {
-          throw new Error(error.message);
-        });
-      }
-    }, (error) => {
-      throw new Error(error.message);
-    });
-  }
-
-  authenticate() {
-    return fetch('https://api.eventable.com/v1/token-auth/', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: creds
-    });
+    this.getEvents(token)
+      .then(response => response.json())
+      .then(data => this.setState({ events: data.results }))
+      .catch(err => console.log(err));
   }
 
   getEvents(token) {
-    return fetch('https://api.eventable.com/v1/events/', {
+    return fetch('https://api.eventable.com/v1/events/?format=json', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -43,6 +31,31 @@ class EventList extends React.Component {
       credentials: 'same-origin'
     });
   }
+
+  addEvent(event) {
+    if (event) {
+      this.state.events.push(event);
+
+      this.setState({
+        events: this.state.events
+      });
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <Grid>
+          <Row>
+            <Col md={12}>
+              <EventForm addEvent={this.addEvent.bind(this)}/>
+              <EventList events={this.state.events}/>
+            </Col>
+          </Row>
+        </Grid>
+      </div>
+    );
+  }
 }
 
-export default EventList;
+export default Event;

@@ -1,18 +1,20 @@
-import { Media, Col } from 'react-bootstrap';
+import React from 'react';
+import { Accordion, Panel } from 'react-bootstrap';
 
-const EventItem = (props) => {
+const EventItem = ({event}) => {
   return (
-      <Col md={4} sm={6}>
-          <div className="event-item">
-            <Media>
-              <Media.Body>
-                <Media.Heading>{props.item.title}</Media.Heading>
-                <p>{props.item.startTime}</p>
-                <p>{props.item.endTime}</p>
-              </Media.Body>
-            </Media>
-          </div>
-      </Col>
+   <div className="event-item">
+      <Accordion>
+        <Panel bsClass="primary" header={event.title}>
+          <h2>Description:</h2>
+          <p>{event.description || 'No description available'}</p>
+          <h2>Start:</h2>
+          <p>{event.start_time}</p>
+          <h2>End:</h2>
+          <p>{event.end_time}</p>
+        </Panel>
+      </Accordion>
+    </div>
   );
 };
 
