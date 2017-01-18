@@ -1,8 +1,8 @@
-import { Component } from 'react';
+import React from 'react';
 import creds from '../creds.js';
 import 'whatwg-fetch';
 
-class EventList extends Component {
+class EventList extends React.Component {
   constructor(props) {
     super(props);
 

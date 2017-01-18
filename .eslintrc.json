@@ -17,6 +17,7 @@
         "react"
     ],
     "rules": {
+        "react/jsx-uses-vars": [2],
         "linebreak-style": [
             "error",
             "unix"
