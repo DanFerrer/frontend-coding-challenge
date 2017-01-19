@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
-import token from '../apiToken.js';
+import token from '../shared/apiToken';
 import EventForm from './EventForm';
 import EventList from './EventList';
 import 'whatwg-fetch';
