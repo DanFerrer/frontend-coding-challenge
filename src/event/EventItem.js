@@ -1,17 +1,17 @@
 import React from 'react';
 import { Accordion, Panel } from 'react-bootstrap';
 
-const EventItem = ({event}) => {
+const EventItem = (props) => {
   return (
    <div className="event-item">
       <Accordion>
-        <Panel bsClass="primary" header={event.title}>
+        <Panel bsClass="primary" header={props.event.title}>
           <h2>Description:</h2>
-          <p>{event.description || 'No description available'}</p>
+          <p>{props.event.description || 'No description available'}</p>
           <h2>Start:</h2>
-          <p>{event.start_time}</p>
+          <p>{props.event.start_time}</p>
           <h2>End:</h2>
-          <p>{event.end_time}</p>
+          <p>{props.event.end_time}</p>
         </Panel>
       </Accordion>
     </div>
