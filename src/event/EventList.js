@@ -7,7 +7,7 @@ const EventList = ({events}) => {
     <div className="events">
       <Grid>
         <Row>
-          { events.map(event => <EventItem event={event} key={event.id}/> )}
+          {events.map(event => <EventItem event={event} key={event.id}/>)}
         </Row>
       </Grid>
     </div>
