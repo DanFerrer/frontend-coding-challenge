@@ -12,6 +12,8 @@ class Event extends Component {
     this.state = {
       events: []
     };
+
+    this.addEvent = this.addEvent.bind(this);
   }
 
   componentDidMount() {
@@ -49,7 +51,7 @@ class Event extends Component {
         <Grid>
           <Row>
             <Col md={12}>
-              <EventForm addEvent={this.addEvent.bind(this)}/>
+              <EventForm addEvent={this.addEvent}/>
               <EventList events={this.state.events}/>
             </Col>
           </Row>
