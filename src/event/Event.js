@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 
+import EventSort from './EventSort';
 import EventSearch from './EventSearch';
 import EventForm from './EventForm';
 import EventList from './EventList';
 
 import token from '../shared/apiToken';
+import moment from 'moment';
 import 'whatwg-fetch';
 
 class Event extends Component {
@@ -19,6 +21,7 @@ class Event extends Component {
 
     this.addEvent = this.addEvent.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
+    this.onSortChange = this.onSortChange.bind(this);
   }
 
   componentDidMount() {
@@ -53,16 +56,30 @@ class Event extends Component {
     });
   }
 
-  sortEventsByTitle() {
-    return this.state.events.sort((a, b) => {
-      if (a.title > b.title) {
-        return 1;
-      } else if (a.title < b.title) {
-        return -1;
-      } else {
-        return 0;
-      }
-    });
+  onSortChange(ev) {
+    let option = ev.target.value;
+    let unsortedEvents = this.state.events;
+    let sortedEvents;
+
+    if (option === 'title') {
+      sortedEvents = unsortedEvents.sort((a, b) => {
+        if (a.title > b.title) {
+          return 1;
+        } else if (a.title < b.title) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+    }
+
+    if (option === 'startDate') {
+      sortedEvents = unsortedEvents.sort((a, b) => {
+         return moment(a.start_time) - moment(b.start_time);
+      });
+    }
+
+    if (sortedEvents) this.setState({events: sortedEvents});
   }
 
   onSearchChange(ev) {
@@ -77,6 +94,7 @@ class Event extends Component {
         <Grid>
           <Row>
             <Col md={12}>
+              <EventSort onSortChange={this.onSortChange}/>
               <EventSearch search={this.state.search} onSearchChange={this.onSearchChange} />
               <EventForm addEvent={this.addEvent}/>
               <EventList events={this.searchEventsByTitle() || this.state.events}/>
