@@ -53,6 +53,18 @@ class Event extends Component {
     });
   }
 
+  sortEventsByTitle() {
+    return this.state.events.sort((a, b) => {
+      if (a.title > b.title) {
+        return 1;
+      } else if (a.title < b.title) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
   onSearchChange(ev) {
     this.setState({
       search: ev.target.value
