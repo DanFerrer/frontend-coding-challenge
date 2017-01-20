@@ -1,19 +1,20 @@
 import React from 'react';
-import { Accordion, Panel } from 'react-bootstrap';
+import { PanelGroup, Panel } from 'react-bootstrap';
+import moment from 'moment';
 
 const EventItem = (props) => {
   return (
    <div className="event-item">
-      <Accordion>
-        <Panel bsClass="primary" header={props.event.title}>
+      <PanelGroup accordion>
+        <Panel header={props.event.title}>
           <h2>Description:</h2>
           <p>{props.event.description || 'No description available'}</p>
           <h2>Start:</h2>
-          <p>{props.event.start_time}</p>
+          <p>{moment(props.event.start_time).format('YYYY-MM-DD HH:mm:ss')}</p>
           <h2>End:</h2>
-          <p>{props.event.end_time}</p>
+          <p>{moment(props.event.end_time).format('YYYY-MM-DD HH:mm:ss')}</p>
         </Panel>
-      </Accordion>
+      </PanelGroup>
     </div>
   );
 };

@@ -7,7 +7,6 @@ import EventForm from './EventForm';
 import EventList from './EventList';
 
 import token from '../shared/apiToken';
-import moment from 'moment';
 import 'whatwg-fetch';
 
 class Event extends Component {
@@ -58,26 +57,17 @@ class Event extends Component {
 
   onSortChange(ev) {
     let option = ev.target.value;
-    let unsortedEvents = this.state.events;
     let sortedEvents;
 
-    if (option === 'title') {
-      sortedEvents = unsortedEvents.sort((a, b) => {
-        if (a.title > b.title) {
+    sortedEvents = this.state.events.sort((a, b) => {
+        if (a[option] > b[option]) {
           return 1;
-        } else if (a.title < b.title) {
+        } else if (a[option] < b[option]) {
           return -1;
         } else {
           return 0;
         }
       });
-    }
-
-    if (option === 'startDate') {
-      sortedEvents = unsortedEvents.sort((a, b) => {
-         return moment(a.start_time) - moment(b.start_time);
-      });
-    }
 
     if (sortedEvents) this.setState({events: sortedEvents});
   }
