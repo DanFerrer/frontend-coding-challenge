@@ -13,10 +13,12 @@ class Event extends Component {
     super(props);
 
     this.state = {
-      events: []
+      events: [],
+      search: ''
     };
 
     this.addEvent = this.addEvent.bind(this);
+    this.onSearchChange = this.onSearchChange.bind(this);
   }
 
   componentDidMount() {
@@ -38,14 +40,23 @@ class Event extends Component {
   }
 
   addEvent(event) {
-    if (event) {
-      console.log(event);
-      this.state.events.push(event);
+    this.state.events.push(event);
 
-      this.setState({
-        events: this.state.events
-      });
-    }
+    this.setState({
+      events: this.state.events
+    });
+  }
+
+  searchEventsByTitle() {
+    return this.state.events.filter((event) => {
+      return event.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+    });
+  }
+
+  onSearchChange(ev) {
+    this.setState({
+      search: ev.target.value
+    });
   }
 
   render() {
@@ -54,9 +65,9 @@ class Event extends Component {
         <Grid>
           <Row>
             <Col md={12}>
-              <EventSearch />
+              <EventSearch search={this.state.search} onSearchChange={this.onSearchChange} />
               <EventForm addEvent={this.addEvent}/>
-              <EventList events={this.state.events}/>
+              <EventList events={this.searchEventsByTitle() || this.state.events}/>
             </Col>
           </Row>
         </Grid>
