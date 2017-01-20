@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import moment from 'moment';
-import guid from '../shared/guid'
+import guid from '../shared/guid';
 
 class EventForm extends Component {
   constructor(props) {
@@ -55,13 +55,13 @@ class EventForm extends Component {
 
     this.props.addEvent(newEvent);
 
-    this.setState = {
-      id: ''
+    this.setState({
+      id: '',
       title: '',
       description: '',
       start_time: '',
       end_time: ''
-    };
+    });
  }
 
  render() {
