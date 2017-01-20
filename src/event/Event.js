@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row } from 'react-bootstrap';
 
 import EventSort from './EventSort';
 import EventSearch from './EventSearch';
@@ -83,12 +83,12 @@ class Event extends Component {
       <div>
         <Grid>
           <Row>
-            <Col md={12}>
-              <EventSort onSortChange={this.onSortChange}/>
-              <EventSearch search={this.state.search} onSearchChange={this.onSearchChange} />
-              <EventForm addEvent={this.addEvent}/>
-              <EventList events={this.searchEventsByTitle() || this.state.events}/>
-            </Col>
+            <EventSort onSortChange={this.onSortChange}/>
+            <EventSearch search={this.state.search} onSearchChange={this.onSearchChange} />
+          </Row>
+          <Row>
+            <EventForm addEvent={this.addEvent}/>
+            <EventList events={this.searchEventsByTitle() || this.state.events}/>
           </Row>
         </Grid>
       </div>
