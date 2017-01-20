@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormGroup, FormControl } from 'react-bootstrap';
 
 class EventSearch extends Component {
   constructor() {
@@ -18,7 +19,16 @@ class EventSearch extends Component {
   }
 
   render() {
-    return;
+    return (
+      <FormGroup>
+        <FormControl
+          type="text"
+          value={this.state.search}
+          placeholder="Search events by title"
+          onChange={this.onSearchChange}
+        />
+      </FormGroup>
+    );
   }
 }
 

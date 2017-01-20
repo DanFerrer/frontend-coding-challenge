@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
-import token from '../shared/apiToken';
+
+import EventSearch from './EventSearch';
 import EventForm from './EventForm';
 import EventList from './EventList';
+
+import token from '../shared/apiToken';
 import 'whatwg-fetch';
 
 class Event extends Component {
@@ -51,6 +54,7 @@ class Event extends Component {
         <Grid>
           <Row>
             <Col md={12}>
+              <EventSearch />
               <EventForm addEvent={this.addEvent}/>
               <EventList events={this.state.events}/>
             </Col>
